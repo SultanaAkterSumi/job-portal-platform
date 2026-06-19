@@ -1,8 +1,7 @@
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-// ── Any logged-in user ──
-const protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
@@ -17,20 +16,16 @@ const protect = async (req, res, next) => {
   }
 };
 
-// ── Only employer ──
-const employerOnly = (req, res, next) => {
+export const employerOnly = (req, res, next) => {
   if (req.user?.role !== "employer") {
     return res.status(403).json({ message: "Employer access only" });
   }
   next();
 };
 
-// ── Only jobseeker ──
-const seekerOnly = (req, res, next) => {
+export const seekerOnly = (req, res, next) => {
   if (req.user?.role !== "jobseeker") {
     return res.status(403).json({ message: "Job seeker access only" });
   }
   next();
 };
-
-module.exports = { protect, employerOnly, seekerOnly };
