@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -6,6 +5,7 @@ import Homepage from "./pages/Homepage";
 import JobListings from "./pages/JobListings";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import JobDetails from "./pages/JobDetails";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
           <Route path="/jobs" element={<JobListings />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/jobs/:id" element={<JobDetails />} />
         </Routes>
       </main>
       <Footer />
