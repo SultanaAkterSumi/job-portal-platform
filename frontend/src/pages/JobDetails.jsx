@@ -13,8 +13,8 @@ const MOCK_JOB = {
   experienceLevel: "intermediate",
   skills: ["React", "Tailwind CSS", "JavaScript", "TypeScript", "Git"],
   status: "active",
-  deadline: "2025-07-30T00:00:00Z",
-  createdAt: "2025-06-20T00:00:00Z",
+  deadline: "2026-07-30T00:00:00Z",
+  createdAt: "2026-06-20T00:00:00Z",
   applications: 24,
   description:
     "TechSoft BD is a leading software company based in Dhaka. We build innovative web applications for clients across Southeast Asia. We are looking for a skilled and passionate Frontend Developer to join our dynamic team and contribute to exciting projects.",
@@ -61,9 +61,9 @@ export default function JobDetails() {
   const [applying, setApplying] = useState(false);
   const [applySuccess, setApplySuccess] = useState(false);
 
-  // ── API থেকে job details আনার জায়গা ───────────────────────────────────────
+  // ── Job Deails From API───────────────────────────────────────
   useEffect(() => {
-    // Real API call (Role D connect করবে):
+    // Real API call (Connection):
     // const fetchJob = async () => {
     //   try {
     //     const res = await fetch(`/api/jobs/${id}`);
@@ -77,14 +77,14 @@ export default function JobDetails() {
     // };
     // fetchJob();
 
-    // Mock data দিয়ে কাজ করা:
+    // Mock data:
     setTimeout(() => {
       setJob(MOCK_JOB);
       setLoading(false);
     }, 500);
   }, [id]);
 
-  // Apply handler (Role D এর API connect হলে এখানে POST call যাবে)
+  // Apply handler (POST Call after API integration)
   const handleApply = () => {
     setApplying(true);
     setTimeout(() => {
