@@ -63,36 +63,24 @@ export default function JobDetails() {
 
   // ── Job Deails From API───────────────────────────────────────
   useEffect(() => {
-    // Real API call (Connection):
-    // const fetchJob = async () => {
-    //   try {
-    //     const res = await fetch(`/api/jobs/${id}`);
-    //     const data = await res.json();
-    //     setJob(data);
-    //   } catch (err) {
-    //     console.error(err);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchJob();
-
-    // Mock data:
-    setTimeout(() => {
-      setJob(MOCK_JOB);
-      setLoading(false);
-    }, 500);
+    const fetchJob = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/jobs/${id}`);
+        const data = await res.json();
+        setJob(data);
+      } catch (err) {
+        console.error(err);
+        setJob(MOCK_JOB); // fallback
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchJob();
   }, [id]);
 
   // Apply handler (POST Call after API integration)
   const handleApply = () => {
-    setApplying(true);
-    setTimeout(() => {
-      setApplying(false);
-      setApplySuccess(true);
-    }, 1200);
-    // Real API:
-    // navigate(`/jobs/${id}/apply`);
+    navigate(`/jobs/${id}/apply`);
   };
 
   // Loading Skeleton
