@@ -1,16 +1,62 @@
-# React + Vite
+# Employer Job Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Employer Job Portal is a responsive React.js web page designed for employers and recruiters. It helps employers post jobs, view hiring features, check recent job posts, and contact the platform.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Responsive homepage design
+* Employer-focused hero section
+* Job search and post section
+* Employer dashboard feature cards
+* Recent job posts section
+* Contact section
+* Employer sign-in page
+* Modern UI using React.js and CSS
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* React.js
+* JavaScript
+* CSS
+* React Icons
+* Vite
 
-## Expanding the ESLint configuration
+## Project Description
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project provides a clean and professional employer job portal interface. Employers can explore platform features, post jobs, and access a sign-in page. The design is suitable for a job portal or recruitment platform.
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_REPOSITORY_LINK
+```
+
+Go to the project folder:
+
+```bash
+cd job-portal-platform
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the project:
+
+```bash
+npm run dev
+```
+
+Open in browser:
+
+```text
+http://localhost:5173/
+```
+
+## Author
+
+Employer Job Portal Project
