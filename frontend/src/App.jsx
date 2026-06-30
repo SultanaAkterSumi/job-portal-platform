@@ -3,9 +3,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
 import JobListings from "./pages/JobListings";
+import JobDetails from "./pages/JobDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import JobDetails from "./pages/JobDetails";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -15,9 +17,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/jobs" element={<JobListings />} />
+          <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/jobs/:id" element={<JobDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
       <Footer />
