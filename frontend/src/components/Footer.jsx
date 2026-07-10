@@ -43,15 +43,15 @@ const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>📍 Agrabad C/A, Chittagong, Bangladesh</li>
-              <li>✉️ hello@jobportal.com.bd</li>
-              <li>📞 +880 31 123-4567</li>
+              <li>✉️ info@jobportal.com.bd</li>
+              <li>📞 +880123456789</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-10 pt-6 text-center">
           <p className="text-xs text-gray-500">
-            © 2025 JobPortal. All rights reserved.
+            © 2026 JobPortal. All rights reserved.
           </p>
         </div>
       </div>

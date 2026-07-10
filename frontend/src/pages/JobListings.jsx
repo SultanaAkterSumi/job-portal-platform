@@ -58,6 +58,7 @@ const JobListings = () => {
   };
 
   return (
+    
     <div className="min-h-screen bg-gray-50">
 
       {/* Header */}
@@ -82,6 +83,7 @@ const JobListings = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 flex gap-6">
+        
 
         {/* Sidebar */}
         <div className="hidden md:block w-64 flex-shrink-0">

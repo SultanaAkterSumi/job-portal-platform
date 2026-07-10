@@ -25,15 +25,40 @@ const Homepage = () => {
     <div className="min-h-screen bg-white">
 
       {/* HERO */}
-      <section style={{background: "linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #0f3460 100%)"}} className="pt-28 pb-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-5xl font-extrabold text-white leading-tight mb-4">
-            Find Your Dream Job Today!
-          </h1>
-          <p className="mb-10 text-lg" style={{color: "#94a3b8"}}>
-            Connecting Talent with Opportunity: Your Gateway to Career Success
-          </p>
+      <section 
+  style={{
+    background: "linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #0f3460 100%)",
+    backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8am9ifGVufDB8fDB8fHww')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundBlendMode: "overlay",
+    position: "relative"
+  }} 
+  className="pt-28 pb-20"
+>
+  {/* Blur Overlay */}
+  <div 
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: "rgba(13, 13, 26, 0.7)",
+      backdropFilter: "blur(3px)",
+      WebkitBackdropFilter: "blur(3px)",
+      zIndex: 1
+    }}
+  ></div>
 
+  {/* Content */}
+  <div style={{ position: "relative", zIndex: 2 }} className="max-w-4xl mx-auto px-4 text-center">
+    <h1 className="text-5xl font-extrabold text-white leading-tight mb-4">
+      Find Your Dream Job Today!
+    </h1>
+    <p className="mb-10 text-lg" style={{color: "#94a3b8"}}>
+      Connecting Talent with Opportunity: Your Gateway to Career Success
+    </p>
           <form onSubmit={handleSearch} className="bg-white rounded-2xl p-2 flex gap-2 max-w-3xl mx-auto mb-10" style={{boxShadow: "0 20px 60px rgba(0,0,0,0.4)"}}>
             <input
               type="text"
@@ -168,7 +193,11 @@ const Homepage = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="bg-gray-200 rounded-2xl h-72 flex items-center justify-center">
-              <span className="text-gray-400 text-sm">Company Image</span>
+              <span className="text-gray-400 text-sm"><img
+  src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvbXBhbnl8ZW58MHx8MHx8fDA%3D"
+  alt="Office Team Collaboration"
+  className="w-full h-full object-cover rounded-lg"
+/></span>
             </div>
             <div>
               <h2 className="text-3xl font-bold mb-4" style={{color: "#1a1a2e"}}>Good Life Begins With A Good Company</h2>
@@ -208,7 +237,11 @@ const Homepage = () => {
               <button onClick={() => navigate("/jobs")} className="text-white font-semibold px-6 py-2.5 rounded-lg text-sm" style={{background: "#f97316"}}>Search Job</button>
             </div>
             <div className="bg-gray-700 rounded-2xl h-64 flex items-center justify-center">
-              <span className="text-gray-400 text-sm">Career Image</span>
+              <span className="text-gray-400 text-sm"><img
+  src="https://plus.unsplash.com/premium_photo-1661328090120-a6ef40841abe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGNhcmVlcnxlbnwwfHwwfHx8MA%3D%3D"
+  alt="Office Team Collaboration"
+  className="w-full h-full object-cover rounded-lg"
+/></span>
             </div>
           </div>
         </div>
