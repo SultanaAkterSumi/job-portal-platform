@@ -62,7 +62,7 @@ const JobListings = () => {
     <div className="min-h-screen bg-gray-50">
 
       {/* Header */}
-      <div className="py-10" style={{background: "linear-gradient(135deg, #1a1a2e, #0f3460)"}}>
+      <div className="py-10" style={{backgroundImage: "linear-gradient(135deg, rgba(26,26,46,0.85), rgba(15,52,96,0.85)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhpcmluZ3xlbnwwfHwwfHx8MA%3D%3D')"}}>
         <div className="max-w-7xl mx-auto px-4 pt-6">
           <h1 className="text-3xl font-bold text-white mb-1">Find Your Perfect Job</h1>
           <p className="mb-6" style={{color: "#94a3b8"}}>{jobs.length} jobs available</p>
@@ -83,7 +83,6 @@ const JobListings = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 flex gap-6">
-        
 
         {/* Sidebar */}
         <div className="hidden md:block w-64 flex-shrink-0">

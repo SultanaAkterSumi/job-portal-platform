@@ -3,7 +3,8 @@ const About = () => {
     <div className="min-h-screen bg-gray-50 pt-16">
 
       {/* HERO */}
-      <section className="py-20 text-center" style={{background: "linear-gradient(135deg, #1a1a2e, #0f3460)"}}>
+      <section className="py-20 text-center" style={{backgroundImage: "linear-gradient(135deg, rgba(26,26,46,0.85), rgba(15,52,96,0.85)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8am9ifGVufDB8fDB8fHww')"
+  }}>
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-4xl font-bold text-white mb-4">About Us</h1>
           <p className="text-lg" style={{color: "#94a3b8"}}>
