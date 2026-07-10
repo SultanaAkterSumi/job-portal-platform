@@ -16,6 +16,7 @@ const Navbar = () => {
     { label: "Find Jobs", path: "/jobs" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
+    { label: "Post a Job", path: "/post-job" }
 
   ];
 

@@ -20,8 +20,13 @@ const Login = () => {
     setError("");
     try {
       const res = await API.post("/auth/login", formData);
-      login(res.data.user, res.data.token);
-      navigate("/");
+login(res.data.user, res.data.token);
+
+if (res.data.user.role === "employer") {
+  navigate("/employer");
+} else {
+  navigate("/");
+}
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
