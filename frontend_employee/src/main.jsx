@@ -97,7 +97,10 @@ function HomePage({ setPage }) {
           </div>
         </div>
 
-       
+        <div className="sliderArrows">
+          <button>‹</button>
+          <button>›</button>
+        </div>
       </section>
 
       <section className="searchSection">
