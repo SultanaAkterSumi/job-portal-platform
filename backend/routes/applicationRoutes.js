@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Application from "../models/Application.js";
 import Job from "../models/Job.js";
 import {
@@ -40,6 +41,10 @@ router.post(
   async (req, res) => {
     try {
       const { job, coverLetter } = req.body;
+
+      if (!job || !mongoose.isValidObjectId(job)) {
+        return res.status(400).json({ message: "Invalid job ID" });
+      }
 
       const jobPost = await Job.findById(job);
       if (!jobPost) {
