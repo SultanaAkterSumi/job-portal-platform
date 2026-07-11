@@ -100,19 +100,21 @@ const Navbar = () => {
           {/* Right Side */}
           {!isAuthPage && (
             <div className="hidden md:flex items-center gap-3">
-              {isEmployer ? (
-                <>
-                  <Link
-                    to="/post-job"
-                    className="text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white px-5 py-2 rounded-lg transition-colors"
-                  >
-                    Post New Job
-                  </Link>
-                  <button onClick={handleLogout} className="text-sm text-red-500">
-                    Logout
-                  </button>
-                </>
-              ) : isJobSeeker ? (
+             {isEmployer ? (
+  <>
+    {location.pathname !== "/post-job" && (
+      <Link
+        to="/post-job"
+        className="text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white px-5 py-2 rounded-lg transition-colors"
+      >
+        Post New Job
+      </Link>
+    )}
+    <button onClick={handleLogout} className="text-sm text-red-500">
+      Logout
+    </button>
+  </>
+) : isJobSeeker ? (
                 <div className="flex items-center gap-3">
                   <Link
                     to="/my-applications"

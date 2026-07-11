@@ -1,4 +1,4 @@
-import React, { useState } from "react";  
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -20,11 +20,18 @@ const EmployerHome = () => {
     navigate("/");
   };
 
+  const handlePostJobClick = () => {
+    if (isAuthenticated) {
+      navigate("/post-job");
+    } else {
+      navigate("/register");
+    }
+  };
+
   return (
     <div style={{ fontFamily: "Poppins, Arial, sans-serif" }}>
       {/* HOME PAGE */}
       {page === "home" && (
-                
         <>
           {/* Navbar */}
           <nav style={{ background: "#1a1a2e", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 42px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
@@ -34,12 +41,12 @@ const EmployerHome = () => {
             </div>
 
             <ul style={{ display: "flex", gap: "32px", listStyle: "none", fontSize: "12px", fontWeight: "700", color: "#cbd5e1", margin: 0, padding: 0, alignItems: "center" }}>
-              <li 
+              <li
                 onClick={() => setPage("home")}
                 style={{ cursor: "pointer", color: "#0d9488" }}>
                 HOME
               </li>
-              <li 
+              <li
                 onClick={() => setPage("about")}
                 style={{ cursor: "pointer" }}>
                 ABOUT
@@ -52,20 +59,20 @@ const EmployerHome = () => {
             </ul>
 
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-  {isAuthenticated ? (
-    <button
-      onClick={handleLogout}
-      style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-      Logout
-    </button>
-  ) : (
-    <button
-      onClick={() => navigate("/login")}
-      style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-      Login
-    </button>
-  )}
-</div>
+              {isAuthenticated ? (
+                <button
+                  onClick={handleLogout}
+                  style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+                  Logout
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate("/login")}
+                  style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+                  Login
+                </button>
+              )}
+            </div>
           </nav>
 
           {/* Hero */}
@@ -85,7 +92,7 @@ const EmployerHome = () => {
 
               <div style={{ display: "flex", gap: "15px" }}>
                 <button
-                  onClick={() => navigate("/register")}
+                  onClick={handlePostJobClick}
                   style={{ background: "#f97316", border: "none", color: "white", padding: "15px 32px", fontSize: "13px", fontWeight: 800, cursor: "pointer" }}>
                   Post A Job
                 </button>
@@ -142,8 +149,8 @@ const EmployerHome = () => {
             <div style={{ position: "relative", zIndex: 2, textAlign: "center", color: "white" }}>
               <h2 style={{ fontSize: "31px", fontWeight: 900, marginBottom: "12px" }}>Ready To Hire The Best Talent?</h2>
               <p style={{ fontSize: "14px", fontWeight: 600, marginBottom: "24px" }}>Start posting jobs today and connect with qualified candidates.</p>
-              <button 
-                onClick={() => navigate("/register")}
+              <button
+                onClick={handlePostJobClick}
                 style={{ background: "#0d9488", border: "none", color: "white", padding: "14px 34px", fontSize: "13px", fontWeight: 800, cursor: "pointer" }}>
                 Get Started
               </button>
@@ -168,12 +175,12 @@ const EmployerHome = () => {
             </div>
 
             <ul style={{ display: "flex", gap: "32px", listStyle: "none", fontSize: "12px", fontWeight: "700", color: "#cbd5e1", margin: 0, padding: 0, alignItems: "center" }}>
-              <li 
+              <li
                 onClick={() => setPage("home")}
                 style={{ cursor: "pointer" }}>
                 HOME
               </li>
-              <li 
+              <li
                 onClick={() => setPage("about")}
                 style={{ cursor: "pointer", color: "#0d9488" }}>
                 ABOUT
@@ -186,20 +193,20 @@ const EmployerHome = () => {
             </ul>
 
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-  {isAuthenticated ? (
-    <button
-      onClick={handleLogout}
-      style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-      Logout
-    </button>
-  ) : (
-    <button
-      onClick={() => navigate("/login")}
-      style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-      Login
-    </button>
-  )}
-</div>
+              {isAuthenticated ? (
+                <button
+                  onClick={handleLogout}
+                  style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+                  Logout
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate("/login")}
+                  style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+                  Login
+                </button>
+              )}
+            </div>
           </nav>
 
           {/* HERO */}
@@ -227,8 +234,8 @@ const EmployerHome = () => {
                   <p style={{ fontSize: "15px", color: "#4b5563", lineHeight: 1.8, marginBottom: "24px" }}>
                     From fresh graduates to experienced professionals, we help thousands of people find meaningful careers every day across Bangladesh.
                   </p>
-                  <button 
-                    onClick={() => navigate("/register")}
+                  <button
+                    onClick={handlePostJobClick}
                     style={{ background: "#f97316", border: "none", color: "white", padding: "12px 24px", fontSize: "13px", fontWeight: 800, cursor: "pointer", borderRadius: "4px" }}>
                     Post Your First Job
                   </button>

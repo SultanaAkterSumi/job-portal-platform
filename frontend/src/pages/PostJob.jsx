@@ -124,7 +124,7 @@ export default function PostJob() {
 
       setSuccess(true);
       setTimeout(() => {
-        navigate("/employer/dashboard"); // Adjust path as needed
+        navigate("/employer-dashboard");
       }, 2000);
     } catch (err) {
       setError(err.message);
@@ -146,7 +146,7 @@ export default function PostJob() {
             Your job listing is now live and candidates can start applying.
           </p>
           <Link
-            to="/employer/dashboard"
+            to="/employer-dashboard"
             className="bg-teal-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-teal-700 transition-colors inline-block"
           >
             View Dashboard →
@@ -161,7 +161,7 @@ export default function PostJob() {
       <div className="max-w-3xl mx-auto px-4">
         {/* Header */}
         <div className="mb-8">
-          <Link to="/" className="text-teal-600 hover:text-teal-700 text-sm font-medium mb-4 inline-block">
+          <Link to="/employer" className="text-teal-600 hover:text-teal-700 text-sm font-medium mb-4 inline-block">
             ← Back to Home
           </Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Post a New Job</h1>
@@ -273,6 +273,7 @@ export default function PostJob() {
                     <option value="Sales">Sales</option>
                     <option value="HR">HR</option>
                     <option value="Finance">Finance</option>
+                    <option value="Education">Education</option>
                   </select>
                 </div>
               </div>
@@ -498,7 +499,7 @@ export default function PostJob() {
             </button>
 
             <Link
-              to="/"
+              to="/employer"
               className="px-6 py-3 border border-gray-300 text-gray-700 hover:text-gray-900 font-semibold rounded-lg transition-colors"
             >
               Cancel
