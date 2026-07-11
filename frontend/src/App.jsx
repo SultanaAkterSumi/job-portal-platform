@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Pages
+import EmployerDashboard from "./pages/EmployerDashboard";
+import EmployerLogin from "./pages/EmployerLogin";
 import Homepage from "./pages/Homepage";
 import JobListings from "./pages/JobListings";
 import JobDetails from "./pages/JobDetails";
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         {/* Employer Dashboard - without Navbar/Footer */}
         <Route path="/employer" element={<EmployerHome />} />
+        <Route path="/employer-dashboard" element={<EmployerDashboard />} />
+      
 
         {/* All other routes - with Navbar/Footer */}
         <Route
@@ -37,16 +41,11 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
-
+                   <Route path="/employer-login" element={<EmployerLogin />} />
                   {/* Protected Routes */}
-                  <Route
-                    path="/post-job"
-                    element={
-                      <ProtectedRoute requiredRole="employer">
-                        <PostJob />
-                      </ProtectedRoute>
-                    }
-                  />
+                  
+                  <Route path="/post-job" element={<PostJob />} />
+                  
                 </Routes>
               </main>
               <Footer />

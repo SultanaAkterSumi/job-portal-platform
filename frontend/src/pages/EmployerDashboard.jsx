@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 
-export default function EmployerDashboard({ setPage }) {
+export default function EmployerDashboard() {
+  const navigate = useNavigate(); 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -97,7 +99,8 @@ export default function EmployerDashboard({ setPage }) {
             <p style={{ color: "#4b5563" }}>Manage your job listings</p>
           </div>
           <button
-            onClick={() => setPage("postjob")}
+  onClick={() => navigate("/post-job")}
+
             style={{
               backgroundColor: "#14b8a6",
               color: "white",
@@ -138,7 +141,7 @@ export default function EmployerDashboard({ setPage }) {
                 Start by posting your first job listing to attract qualified candidates.
               </p>
               <button
-                onClick={() => setPage("postjob")}
+  onClick={() => navigate("/post-job")}
                 style={{
                   backgroundColor: "#14b8a6",
                   color: "white",

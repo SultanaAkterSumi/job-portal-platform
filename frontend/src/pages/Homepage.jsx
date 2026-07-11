@@ -25,14 +25,43 @@ const Homepage = () => {
     <div className="min-h-screen bg-white">
 
       {/* HERO */}
-      <section style={{background: "linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #0f3460 100%)"}} className="pt-28 pb-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-5xl font-extrabold text-white leading-tight mb-4">
-            Find Your Dream Job Today!
-          </h1>
-          <p className="mb-10 text-lg" style={{color: "#94a3b8"}}>
-            Connecting Talent with Opportunity: Your Gateway to Career Success
-          </p>
+      {/* HERO */}
+<section 
+  style={{
+    background: "linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 50%, #0f3460 100%)",
+    backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundBlendMode: "overlay",
+    position: "relative"
+  }} 
+  className="pt-28 pb-20"
+>
+  {/* Blur Overlay */}
+  <div 
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: "rgba(13, 13, 26, 0.7)",
+      backdropFilter: "blur(3px)",
+      WebkitBackdropFilter: "blur(3px)",
+      zIndex: 1
+    }}
+  ></div>
+
+  {/* Content */}
+  <div style={{ position: "relative", zIndex: 2 }} className="max-w-4xl mx-auto px-4 text-center">
+    <h1 className="text-5xl font-extrabold text-white leading-tight mb-4">
+      Find Your Dream Job Today!
+    </h1>
+    <p className="mb-10 text-lg" style={{color: "#94a3b8"}}>
+      Connecting Talent with Opportunity: Your Gateway to Career Success
+    </p>
+
+   
 
           <form onSubmit={handleSearch} className="bg-white rounded-2xl p-2 flex gap-2 max-w-3xl mx-auto mb-10" style={{boxShadow: "0 20px 60px rgba(0,0,0,0.4)"}}>
             <input
@@ -168,12 +197,16 @@ const Homepage = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="bg-gray-200 rounded-2xl h-72 flex items-center justify-center">
-              <span className="text-gray-400 text-sm">Company Image</span>
+              <img
+  src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNvbXBhbnl8ZW58MHx8MHx8fDA%3D"
+  alt="Office Team Collaboration"
+  className="w-full h-full object-cover rounded-lg"
+/>
             </div>
             <div>
               <h2 className="text-3xl font-bold mb-4" style={{color: "#1a1a2e"}}>Good Life Begins With A Good Company</h2>
               <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                Ultricies purus dolor viverra mi laoreet at cursus justo. Ultrices purus diam egestas amet faucibus tempor blandit.
+                Find meaningful opportunities and work with companies that inspire growth and success. 
               </p>
               <div className="flex gap-3">
                 <button onClick={() => navigate("/jobs")} className="text-white font-semibold px-6 py-2.5 rounded-lg text-sm" style={{background: "#f97316"}}>Search Job</button>
@@ -203,12 +236,16 @@ const Homepage = () => {
             <div>
               <h2 className="text-3xl font-bold text-white mb-4">Create A Better Future For Yourself</h2>
               <p className="text-sm leading-relaxed mb-6" style={{color: "#94a3b8"}}>
-                At eu lobortis pretium tincidunt amet lacus ut aenean aliquet. Blandit a massa elementum id scelerisque rhoncus.
+                Discover opportunities that match your skills, passion, and career goals.
               </p>
               <button onClick={() => navigate("/jobs")} className="text-white font-semibold px-6 py-2.5 rounded-lg text-sm" style={{background: "#f97316"}}>Search Job</button>
             </div>
             <div className="bg-gray-700 rounded-2xl h-64 flex items-center justify-center">
-              <span className="text-gray-400 text-sm">Career Image</span>
+            <img
+  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+  alt="Office Team Collaboration"
+  className="w-full h-full object-cover rounded-lg"
+/>
             </div>
           </div>
         </div>

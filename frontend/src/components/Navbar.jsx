@@ -68,13 +68,27 @@ const Navbar = () => {
               </div>
             ) : (
               <>
-                <Link to="/login" className="text-sm font-medium text-gray-600 hover:text-teal-600 px-4 py-2">
-                  Sign In
-                </Link>
-                <Link to="/register" className="text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white px-5 py-2 rounded-lg transition-colors">
-                  Get Started
-                </Link>
-              </>
+  <Link
+    to="/employer"
+    className="text-sm font-medium text-gray-600 hover:text-teal-600 px-4 py-2"
+  >
+    Employer
+  </Link>
+
+  <Link
+    to="/login"
+    className="text-sm font-medium text-gray-600 hover:text-teal-600 px-4 py-2"
+  >
+    Sign In
+  </Link>
+
+  <Link
+    to="/register"
+    className="text-sm font-semibold bg-teal-500 hover:bg-teal-600 text-white px-5 py-2 rounded-lg transition-colors"
+  >
+    Get Started
+  </Link>
+</>
             )}
           </div>
 
