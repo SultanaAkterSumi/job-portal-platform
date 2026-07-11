@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { categories, jobs, testimonials, topCompanies } from "../data/mockData";
+import { categories, testimonials, topCompanies } from "../data/mockData";
+import API from "../api/axios";
 import JobCard from "../components/JobCard";
 
 const Homepage = () => {
@@ -8,11 +9,24 @@ const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [locationQuery, setLocationQuery] = useState("");
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [recentJobs, setRecentJobs] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 4000);
+
+    const fetchRecentJobs = async () => {
+      try {
+        const res = await API.get("/jobs");
+        setRecentJobs((res.data.jobs || []).slice(0, 5));
+      } catch (error) {
+        console.error("Failed to load recent jobs:", error.response?.data || error);
+        setRecentJobs([]);
+      }
+    };
+
+    fetchRecentJobs();
     return () => clearInterval(interval);
   }, []);
 
@@ -160,8 +174,8 @@ const Homepage = () => {
             </button>
           </div>
           <div className="flex flex-col gap-3">
-            {jobs.slice(0, 5).map((job) => (
-              <JobCard key={job.id} job={job} />
+            {recentJobs.map((job) => (
+              <JobCard key={job._id} job={job} />
             ))}
           </div>
         </div>
