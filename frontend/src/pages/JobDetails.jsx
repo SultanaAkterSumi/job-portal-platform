@@ -290,12 +290,12 @@ export default function JobDetails() {
               </div>
             </div>
 
-            <button
-              onClick={() => navigate("/jobs")}
-              className="w-full border border-gray-200 text-gray-600 hover:border-teal-300 hover:text-teal-700 py-2.5 rounded-lg text-sm transition-colors"
-            >
-              ← Back to Jobs
-            </button>
+           <button
+  onClick={() => navigate(isEmployerView ? "/employer-dashboard" : "/jobs")}
+  className="w-full border border-gray-200 text-gray-600 hover:border-teal-300 hover:text-teal-700 py-2.5 rounded-lg text-sm transition-colors"
+>
+  {isEmployerView ? "← Back to My Jobs" : "← Back to Jobs"}
+</button>
           </aside>
         </div>
       </div>
