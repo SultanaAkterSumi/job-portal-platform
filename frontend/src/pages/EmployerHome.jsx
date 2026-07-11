@@ -1,37 +1,30 @@
 import React, { useState } from "react";  
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import {
-  FaBriefcase,
-  FaArrowRight,
-  FaChevronDown,
   FaUsers,
   FaChartLine,
   FaBuilding,
   FaFileAlt,
-  FaMapMarkerAlt,
-  FaMoneyBillWave,
-} 
-from "react-icons/fa";
-<style>{`
-  * {
-    font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-`}</style>
+} from "react-icons/fa";
 
 const EmployerHome = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState("home");
+  const auth = useAuth();
+  const isAuthenticated = auth?.isAuthenticated;
+  const logout = auth?.logout;
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
+    logout();
+    navigate("/");
   };
 
   return (
     <div style={{ fontFamily: "Poppins, Arial, sans-serif" }}>
       {/* HOME PAGE */}
       {page === "home" && (
+                
         <>
           {/* Navbar */}
           <nav style={{ background: "#1a1a2e", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 42px", boxShadow: "0 2px 8px rgba(0,0,0,0.2)" }}>
@@ -53,18 +46,26 @@ const EmployerHome = () => {
               </li>
               <li
                 onClick={() => navigate("/employer-dashboard")}
-                 style={{ cursor: "pointer" }}>
+                style={{ cursor: "pointer", color: "#14b8a6", fontWeight: "bold" }}>
                 MY JOBS
               </li>
             </ul>
 
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-              <button
-                onClick={handleLogout}
-                style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-                Logout
-              </button>
-            </div>
+  {isAuthenticated ? (
+    <button
+      onClick={handleLogout}
+      style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+      Logout
+    </button>
+  ) : (
+    <button
+      onClick={() => navigate("/login")}
+      style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+      Login
+    </button>
+  )}
+</div>
           </nav>
 
           {/* Hero */}
@@ -84,7 +85,7 @@ const EmployerHome = () => {
 
               <div style={{ display: "flex", gap: "15px" }}>
                 <button
-                  onClick={() => navigate("/post-job")}
+                  onClick={() => navigate("/register")}
                   style={{ background: "#f97316", border: "none", color: "white", padding: "15px 32px", fontSize: "13px", fontWeight: 800, cursor: "pointer" }}>
                   Post A Job
                 </button>
@@ -141,7 +142,9 @@ const EmployerHome = () => {
             <div style={{ position: "relative", zIndex: 2, textAlign: "center", color: "white" }}>
               <h2 style={{ fontSize: "31px", fontWeight: 900, marginBottom: "12px" }}>Ready To Hire The Best Talent?</h2>
               <p style={{ fontSize: "14px", fontWeight: 600, marginBottom: "24px" }}>Start posting jobs today and connect with qualified candidates.</p>
-              <button style={{ background: "#0d9488", border: "none", color: "white", padding: "14px 34px", fontSize: "13px", fontWeight: 800, cursor: "pointer" }}>
+              <button 
+                onClick={() => navigate("/register")}
+                style={{ background: "#0d9488", border: "none", color: "white", padding: "14px 34px", fontSize: "13px", fontWeight: 800, cursor: "pointer" }}>
                 Get Started
               </button>
             </div>
@@ -183,12 +186,20 @@ const EmployerHome = () => {
             </ul>
 
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-              <button
-                onClick={handleLogout}
-                style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
-                Logout
-              </button>
-            </div>
+  {isAuthenticated ? (
+    <button
+      onClick={handleLogout}
+      style={{ background: "transparent", border: "1px solid #f87171", color: "#f87171", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+      Logout
+    </button>
+  ) : (
+    <button
+      onClick={() => navigate("/login")}
+      style={{ background: "transparent", border: "1px solid #cbd5e1", color: "#cbd5e1", padding: "8px 16px", cursor: "pointer", fontSize: "12px", fontWeight: "700", borderRadius: "4px" }}>
+      Login
+    </button>
+  )}
+</div>
           </nav>
 
           {/* HERO */}
@@ -216,8 +227,10 @@ const EmployerHome = () => {
                   <p style={{ fontSize: "15px", color: "#4b5563", lineHeight: 1.8, marginBottom: "24px" }}>
                     From fresh graduates to experienced professionals, we help thousands of people find meaningful careers every day across Bangladesh.
                   </p>
-                  <button style={{ background: "#f97316", border: "none", color: "white", padding: "12px 24px", fontSize: "13px", fontWeight: 800, cursor: "pointer", borderRadius: "4px" }}>
-                    Search Jobs
+                  <button 
+                    onClick={() => navigate("/register")}
+                    style={{ background: "#f97316", border: "none", color: "white", padding: "12px 24px", fontSize: "13px", fontWeight: 800, cursor: "pointer", borderRadius: "4px" }}>
+                    Post Your First Job
                   </button>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
@@ -250,10 +263,7 @@ const EmployerHome = () => {
                   { icon: "🚀", title: "Fast & Easy Apply", desc: "Apply to multiple jobs with a single click. No repetitive forms, no wasted time." },
                   { icon: "📊", title: "Track Your Progress", desc: "Monitor your applications in real-time and stay updated on every step of the hiring process." },
                 ].map((item) => (
-                  <div key={item.title} style={{ background: "#f4f7fb", borderRadius: "12px", padding: "24px", border: "1px solid #e5e7eb", transition: "all 0.3s ease" }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = "#f97316"}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = "#e5e7eb"}
-                  >
+                  <div key={item.title} style={{ background: "#f4f7fb", borderRadius: "12px", padding: "24px", border: "1px solid #e5e7eb" }}>
                     <div style={{ fontSize: "36px", marginBottom: "16px" }}>{item.icon}</div>
                     <h3 style={{ fontWeight: 700, fontSize: "16px", marginBottom: "8px", color: "#1a1a2e" }}>{item.title}</h3>
                     <p style={{ fontSize: "13px", color: "#4b5563", lineHeight: 1.8 }}>{item.desc}</p>

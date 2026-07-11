@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext";
 // ─── Mock Job Data ─────────────────────────────────────────────────────────────
 const MOCK_JOB = {
   _id: "1",
@@ -56,6 +56,8 @@ function SectionTitle({ children }) {
 export default function JobDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const auth = useAuth();
+const isEmployerView = auth?.user?.role === "employer";
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
@@ -264,48 +266,75 @@ export default function JobDetails() {
           {/* ── RIGHT: Sidebar ── */}
           <div className="w-full lg:w-72 flex-shrink-0 flex flex-col gap-5">
             {/* Apply Card */}
-            <div className="bg-white rounded-xl border border-gray-200 p-5 sticky top-4">
-              <h3 className="font-semibold text-gray-800 mb-4">Apply for this Job</h3>
+            {/* Apply Card */}
+<div className="bg-white rounded-xl border border-gray-200 p-5 sticky top-4">
+  {isEmployerView ? (
+    // ---- Employer view: show job overview instead of Apply button ----
+    <>
+      <h3 className="font-semibold text-gray-800 mb-4">Job Overview</h3>
+      <div className="space-y-3 text-sm">
+        <div className="flex justify-between">
+          <span className="text-gray-500">Status</span>
+          <span className="font-medium text-green-600 capitalize">{job.status}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-500">Total Applicants</span>
+          <span className="font-medium text-gray-700">{job.applications}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-500">Deadline</span>
+          <span className={`font-medium ${daysLeft <= 7 ? "text-red-600" : "text-gray-700"}`}>
+            {deadline.toLocaleDateString("en-BD", { day: "numeric", month: "long", year: "numeric" })}
+          </span>
+        </div>
+      </div>
+    </>
+  ) : (
+    // ---- Job seeker view: normal Apply button ----
+    <>
+      <h3 className="font-semibold text-gray-800 mb-4">Apply for this Job</h3>
 
-              {applySuccess ? (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-                  <div className="text-3xl mb-2">🎉</div>
-                  <p className="text-green-700 font-medium text-sm">Application Submitted!</p>
-                  <p className="text-green-600 text-xs mt-1">We will notify you of any updates.</p>
-                  <Link to="/my-applications" className="block mt-3 text-teal-600 text-sm font-medium hover:underline">
-                    View My Applications →
-                  </Link>
-                </div>
-              ) : (
-                <>
-                  <p className="text-sm text-gray-500 mb-4">
-                    Deadline:{" "}
-                    <span className={`font-medium ${daysLeft <= 7 ? "text-red-600" : "text-gray-700"}`}>
-                      {deadline.toLocaleDateString("en-BD", { day: "numeric", month: "long", year: "numeric" })}
-                    </span>
-                  </p>
-                  <button
-                    onClick={handleApply}
-                    disabled={applying || daysLeft <= 0}
-                    className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-                  >
-                    {applying ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Submitting...
-                      </>
-                    ) : daysLeft <= 0 ? (
-                      "Deadline Passed"
-                    ) : (
-                      "Apply Now"
-                    )}
-                  </button>
-                  <p className="text-xs text-gray-400 text-center mt-3">
-                    {job.applications} people already applied
-                  </p>
-                </>
-              )}
-            </div>
+      {applySuccess ? (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+          <div className="text-3xl mb-2">🎉</div>
+          <p className="text-green-700 font-medium text-sm">Application Submitted!</p>
+          <p className="text-green-600 text-xs mt-1">We will notify you of any updates.</p>
+          <Link to="/my-applications" className="block mt-3 text-teal-600 text-sm font-medium hover:underline">
+            View My Applications →
+          </Link>
+        </div>
+      ) : (
+        <>
+          <p className="text-sm text-gray-500 mb-4">
+            Deadline:{" "}
+            <span className={`font-medium ${daysLeft <= 7 ? "text-red-600" : "text-gray-700"}`}>
+              {deadline.toLocaleDateString("en-BD", { day: "numeric", month: "long", year: "numeric" })}
+            </span>
+          </p>
+          <button
+            onClick={handleApply}
+            disabled={applying || daysLeft <= 0}
+            className="w-full bg-teal-600 hover:bg-teal-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+          >
+            {applying ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Submitting...
+              </>
+            ) : daysLeft <= 0 ? (
+              "Deadline Passed"
+            ) : (
+              "Apply Now"
+            )}
+          </button>
+          <p className="text-xs text-gray-400 text-center mt-3">
+            {job.applications} people already applied
+          </p>
+        </>
+      )}
+    </>
+  )}
+</div>
 
             {/* Share Card */}
             <div className="bg-white rounded-xl border border-gray-200 p-5">

@@ -16,6 +16,7 @@ import Register from "./pages/Register";
 import PostJob from "./pages/PostJob";
 import EmployerHome from "./pages/EmployerHome";
 
+
 function App() {
   return (
     <BrowserRouter>

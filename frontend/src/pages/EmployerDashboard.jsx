@@ -247,22 +247,25 @@ export default function EmployerDashboard() {
                     {/* Actions */}
                     <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                       <button
-                        style={{
-                          padding: "8px 16px",
-                          backgroundColor: "#ccf0ee",
-                          color: "#14b8a6",
-                          border: "none",
-                          borderRadius: "6px",
-                          fontSize: "12px",
-                          fontWeight: "500",
-                          cursor: "pointer",
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "4px",
-                        }}
-                      >
-                        <FaEye /> View
-                      </button>
+  onClick={() =>
+    navigate(`/jobs/${job._id}`, { state: { fromEmployer: true } })
+  }
+  style={{
+    padding: "8px 16px",
+    backgroundColor: "#ccf0ee",
+    color: "#14b8a6",
+    border: "none",
+    borderRadius: "6px",
+    fontSize: "12px",
+    fontWeight: "500",
+    cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+  }}
+>
+  <FaEye /> View
+</button>
                       <button
                         onClick={() => handleDelete(job._id)}
                         disabled={deleteLoading === job._id}
