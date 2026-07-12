@@ -92,15 +92,31 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
+// ── GET MY JOBS (Employer only) ────────────────────
+// GET /api/jobs/my-jobs
+router.get("/my-jobs", protect, employerOnly, async (req, res) => {
+  try {
+    const jobs = await Job.find({ postedBy: req.user._id }).sort({
+      createdAt: -1,
+    });
+    res.status(200).json({ count: jobs.length, jobs });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
 
 // ── GET SINGLE JOB ─────────────────────────────────
 // GET /api/jobs/:id
 router.get("/:id", async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id).populate(
-      "postedBy",
-      "name email",
-    );
+    const { id } = req.params;
+
+    // MongoDB ObjectId validation
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid job ID" });
+    }
+
+    const job = await Job.findById(id).populate("postedBy", "name email");
 
     if (!job) {
       return res.status(404).json({ message: "Job not found" });
@@ -108,6 +124,7 @@ router.get("/:id", async (req, res) => {
 
     res.status(200).json(job);
   } catch (error) {
+    console.error("Error fetching job:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });

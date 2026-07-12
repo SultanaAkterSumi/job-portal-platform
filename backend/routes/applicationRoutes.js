@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Application from "../models/Application.js";
 import Job from "../models/Job.js";
 import {
@@ -31,64 +32,55 @@ const uploadToCloudinary = (buffer, filename) => {
 };
 
 // ── APPLY FOR A JOB ───────────────────────────────
-// POST /api/applications
-router.post(
-  "/",
-  protect,
-  seekerOnly,
-  upload.single("resume"),
-  async (req, res) => {
-    try {
-      const { job, coverLetter } = req.body;
+router.post("/", protect, seekerOnly, async (req, res) => {
+  try {
+    const { job, coverLetter, resumeLink } = req.body;
 
-      const jobPost = await Job.findById(job);
-      if (!jobPost) {
-        return res.status(404).json({ message: "Job not found" });
-      }
-
-      if (jobPost.status !== "active") {
-        return res
-          .status(400)
-          .json({ message: "This job is no longer accepting applications" });
-      }
-
-      const alreadyApplied = await Application.findOne({
-        job,
-        applicant: req.user._id,
-      });
-      if (alreadyApplied) {
-        return res
-          .status(400)
-          .json({ message: "You have already applied for this job" });
-      }
-
-      if (!req.file) {
-        return res.status(400).json({ message: "Resume (PDF) is required" });
-      }
-
-      // Upload to Cloudinary
-      const cloudinaryResult = await uploadToCloudinary(
-        req.file.buffer,
-        req.file.originalname,
-      );
-
-      const application = await Application.create({
-        job,
-        applicant: req.user._id,
-        resume: cloudinaryResult.secure_url,
-        coverLetter,
-      });
-
-      await Job.findByIdAndUpdate(job, { $inc: { applications: 1 } });
-
-      res
-        .status(201)
-        .json({ message: "Application submitted successfully", application });
-    } catch (error) {
-      res.status(500).json({ message: "Server error", error: error.message });
+    if (!job || !mongoose.isValidObjectId(job)) {
+      return res.status(400).json({ message: "Invalid job ID" });
     }
-  },
-);
+
+    const jobPost = await Job.findById(job);
+    if (!jobPost) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    if (jobPost.status !== "active") {
+      return res
+        .status(400)
+        .json({ message: "This job is no longer accepting applications" });
+    }
+
+    const alreadyApplied = await Application.findOne({
+      job,
+      applicant: req.user._id,
+    });
+    if (alreadyApplied) {
+      return res
+        .status(400)
+        .json({ message: "You have already applied for this job" });
+    }
+
+    if (!resumeLink) {
+      return res.status(400).json({ message: "Resume link is required" });
+    }
+
+    const application = await Application.create({
+      job,
+      applicant: req.user._id,
+      resume: resumeLink,
+      coverLetter,
+    });
+
+    await Job.findByIdAndUpdate(job, { $inc: { applications: 1 } });
+
+    res
+      .status(201)
+      .json({ message: "Application submitted successfully", application });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
 
 // ── MY APPLICATIONS (Seeker) ──────────────────────
 // GET /api/applications
