@@ -9,38 +9,33 @@ export default function ApplyForm() {
   const navigate = useNavigate();
 
   const [coverLetter, setCoverLetter] = useState("");
-  const [resume, setResume] = useState(null);
+  const [resumeLink, setResumeLink] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!objectIdPattern.test(id || "")) {
-      alert("Invalid job ID. Please open the job from the jobs page again.");
+      alert("Invalid job ID.");
       navigate("/jobs");
       return;
     }
 
-    if (!resume) {
-      alert("Please select a PDF resume.");
+    if (!resumeLink.startsWith("https://")) {
+      alert("Please enter a valid Google Drive link starting with https://");
       return;
     }
 
     try {
       setLoading(true);
-
-      const formData = new FormData();
-      formData.append("job", id);
-      formData.append("coverLetter", coverLetter);
-      formData.append("resume", resume);
-
-      // Do not set Content-Type manually. Axios/browser adds the multipart boundary.
-      const res = await API.post("/applications", formData);
-
+      const res = await API.post("/applications", {
+        job: id,
+        coverLetter,
+        resumeLink,
+      });
       alert(res.data.message || "Application submitted successfully");
       navigate("/my-applications");
     } catch (error) {
-      console.error("Application submit failed:", error.response?.data || error);
       alert(error.response?.data?.message || "Failed to submit application");
     } finally {
       setLoading(false);
@@ -68,14 +63,20 @@ export default function ApplyForm() {
           </div>
 
           <div>
-            <label className="block mb-2 font-medium">Resume (PDF)</label>
+            <label className="block mb-2 font-medium">
+              Resume Link (Google Drive)
+            </label>
             <input
-              type="file"
-              accept="application/pdf,.pdf"
-              onChange={(e) => setResume(e.target.files?.[0] || null)}
-              className="w-full border rounded-lg p-2"
+              type="url"
+              value={resumeLink}
+              onChange={(e) => setResumeLink(e.target.value)}
+              className="w-full border rounded-lg p-3"
+              placeholder="https://drive.google.com/file/d/..."
               required
             />
+            <p className="text-xs text-gray-400 mt-1">
+              Google Drive এ file upload করে "Anyone with the link" করে link দাও
+            </p>
           </div>
 
           <button

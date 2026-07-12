@@ -21,6 +21,8 @@ const uploadToCloudinary = (buffer, filename) => {
         resource_type: "raw",
         format: "pdf",
         public_id: `resume_${Date.now()}`,
+        type: "upload",
+        access_mode: "public",
       },
       (error, result) => {
         if (error) reject(error);
@@ -67,20 +69,14 @@ router.post(
           .json({ message: "You have already applied for this job" });
       }
 
-      if (!req.file) {
-        return res.status(400).json({ message: "Resume (PDF) is required" });
+      if (!resumeLink) {
+        return res.status(400).json({ message: "Resume link is required" });
       }
-
-      // Upload to Cloudinary
-      const cloudinaryResult = await uploadToCloudinary(
-        req.file.buffer,
-        req.file.originalname,
-      );
 
       const application = await Application.create({
         job,
         applicant: req.user._id,
-        resume: cloudinaryResult.secure_url,
+        resume: resumeLink,
         coverLetter,
       });
 
@@ -94,7 +90,6 @@ router.post(
     }
   },
 );
-
 // ── MY APPLICATIONS (Seeker) ──────────────────────
 // GET /api/applications
 router.get("/", protect, seekerOnly, async (req, res) => {

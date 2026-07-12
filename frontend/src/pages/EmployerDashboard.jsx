@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 
+
 export default function EmployerDashboard() {
   const navigate = useNavigate(); 
   const [jobs, setJobs] = useState([]);
@@ -247,9 +248,7 @@ export default function EmployerDashboard() {
                     {/* Actions */}
                     <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
                       <button
-  onClick={() =>
-    navigate(`/jobs/${job._id}`, { state: { fromEmployer: true } })
-  }
+  onClick={() => navigate(`/employer/applicants/${job._id}`)}
   style={{
     padding: "8px 16px",
     backgroundColor: "#ccf0ee",
@@ -264,7 +263,7 @@ export default function EmployerDashboard() {
     gap: "4px",
   }}
 >
-  <FaEye /> View
+  <FaEye /> View Applicants
 </button>
                       <button
                         onClick={() => handleDelete(job._id)}
